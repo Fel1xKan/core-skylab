@@ -1,30 +1,38 @@
-# Skill Market Explorer | 技能市场探索器
+# Skill Market Explorer
 
-这是一个用于收集和发现热门 AI 技能（Coze, Dify, GPT Store 等）的在线工具。
+An online tool for discovering popular AI skills, plugins, and agents across various marketplaces including Coze, Dify, GPT Store, Smithery, HiMCP, and more.
 
-## 🌟 功能特点
-- **动态更新**：通过 GitHub Actions 每天自动运行同步脚本。
-- **热度指标**：实时显示技能的热度（Hotness）和下载量。
-- **一键收藏**：本地持久化保存您感兴趣的技能。
-- **全平台支持**：涵盖主流 AI Agent 市场。
+**🌐 Live Demo: [https://Fel1xKan.github.io/core-skylab/](https://Fel1xKan.github.io/core-skylab/)**
 
-## 🚀 快速开始
+## 🌟 Features
+- **Auto-Sync**: Daily data updates powered by GitHub Actions.
+- **Popularity Metrics**: Real-time display of skill "Hotness" and download counts.
+- **Personal Collection**: Locally persist markers for your favorite skills.
+- **Multi-Platform Support**: Comprehensive coverage of major AI ecosystems.
 
-### 本地运行
-1. 确保已安装 Python 3。
-2. 在终端运行 `python -m http.server 8000`。
-3. 访问 `http://localhost:8000`。
+## 🚀 Quick Start
 
-### 数据同步
-手动更新市场数据：
+### Local Development
+1. Ensure Python 3 is installed.
+2. Run the local server: `python -m http.server 8000`.
+3. Open `http://localhost:8000`.
+
+### Data Synchronization
+Manually refresh market data:
 ```bash
 python sync_market.py
 ```
 
-## 🛠 自动化部署 (GitHub Pages)
-本项目已配置 GitHub Actions。
-- **自动同步**：每天 00:00 (UTC) 自动运行 `sync_market.py` 并提交更新。
-- **手动触发**：在仓库的 `Actions` 标签页，选择 `Market Data Sync` 并点击 `Run workflow`。
+## 🛠 Automation & Deployment
+This project uses GitHub Actions for CI/CD.
+- **Daily Sync**: Automatically runs `sync_market.py` at 00:00 UTC.
+- **Manual Trigger**: Go to the `Actions` tab, select `Market Data Sync`, and click `Run workflow`.
 
-## 📄 许可
+## 📂 Supported Platforms
+- **Coze / Dify / GPT Store / Poe**
+- **Model Context Protocol (MCP)**: Smithery.ai, HiMCP.ai, MCP.run, Pulse MCP
+- **Agent Extensions**: ClawHub, Composio, Toolhouse
+- **Developer Hubs**: LangChain Hub
+
+## 📄 License
 MIT License

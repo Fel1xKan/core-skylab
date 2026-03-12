@@ -21,15 +21,26 @@ const fallbackData = [
         downloads: '1.2M'
     },
     {
-        id: '2',
-        name: 'DALL·E 3 Drawing',
-        platform: 'Coze',
-        category: 'Creative',
-        description: 'Generate high-quality images directly within your agent conversations.',
-        url: 'https://www.coze.com',
+        id: 'smithery_1',
+        name: 'PostgreSQL MCP Server',
+        platform: 'Smithery',
+        category: 'Database',
+        description: 'Connect your AI agents to PostgreSQL databases securely via MCP.',
+        url: 'https://smithery.ai',
         trending: true,
-        hotness: 95,
-        downloads: '850K'
+        hotness: 94,
+        downloads: '150K'
+    },
+    {
+        id: 'composio_1',
+        name: 'GitHub Action Tool',
+        platform: 'Composio',
+        category: 'Productivity',
+        description: 'Trigger GitHub actions and manage PRs directly from LLM agents.',
+        url: 'https://composio.ai',
+        trending: true,
+        hotness: 92,
+        downloads: '210K'
     }
 ];
 
@@ -241,7 +252,14 @@ function renderPlatformsPage() {
         { name: 'Coze', url: 'https://www.coze.com', desc: 'Powerful agent development platform by ByteDance.' },
         { name: 'Dify', url: 'https://dify.ai', desc: 'Open-source LLM app development platform.' },
         { name: 'GPT Store', url: 'https://chat.openai.com/gpts', desc: 'The official marketplace for custom ChatGPTs.' },
-        { name: 'Poe', url: 'https://poe.com', desc: 'Quora\'s platform for interacting with various AI models.' }
+        { name: 'Smithery.ai', url: 'https://smithery.ai', desc: 'Marketplace for Model Context Protocol (MCP) servers.' },
+        { name: 'HiMCP.ai', url: 'https://himcp.ai', desc: 'Discovery platform for high-quality MCP integrations.' },
+        { name: 'MCP.run', url: 'https://mcp.run', desc: 'Serverless platform for deploying and running MCP tools.' },
+        { name: 'Pulse MCP', url: 'https://pulsemcp.com', desc: 'Community-driven registry for AI agent capabilities.' },
+        { name: 'ClawHub', url: 'https://clawhub.io', desc: 'A hub for specialized AI tools and agent extensions.' },
+        { name: 'Composio', url: 'https://composio.ai', desc: 'Platform for connecting LLMs with 100+ professional tools.' },
+        { name: 'Toolhouse', url: 'https://toolhouse.ai', desc: 'Infrastructure for modern AI agents to interact with the world.' },
+        { name: 'LangChain Hub', url: 'https://smith.langchain.com/hub', desc: 'Shared repository for prompts, chains, and agents.' }
     ];
 
     let html = `

@@ -97,5 +97,93 @@
         "trending": true,
         "hotness": 85,
         "downloads": "45K"
+    },
+    {
+        "id": "smithery_1",
+        "name": "PostgreSQL MCP",
+        "platform": "Smithery",
+        "category": "Database",
+        "description": "Enterprise-grade PostgreSQL connector for Model Context Protocol.",
+        "url": "https://smithery.ai",
+        "trending": true,
+        "hotness": 94,
+        "downloads": "12K"
+    },
+    {
+        "id": "himcp_1",
+        "name": "Shopify Storefront",
+        "platform": "HiMCP",
+        "category": "E-commerce",
+        "description": "Manage products and orders via natural language in your agent.",
+        "url": "https://himcp.ai",
+        "trending": false,
+        "hotness": 78,
+        "downloads": "3.5K"
+    },
+    {
+        "id": "mcp_run_1",
+        "name": "Weather Reporter",
+        "platform": "MCP.run",
+        "category": "Information",
+        "description": "Real-time weather data serverless function for AI agents.",
+        "url": "https://mcp.run",
+        "trending": false,
+        "hotness": 82,
+        "downloads": "8.2K"
+    },
+    {
+        "id": "pulse_1",
+        "name": "Financial Analyst",
+        "platform": "PulseMCP",
+        "category": "Finance",
+        "description": "Analyze stock market trends and financial reports using specialized tools.",
+        "url": "https://pulsemcp.com",
+        "trending": true,
+        "hotness": 91,
+        "downloads": "15K"
+    },
+    {
+        "id": "clawhub_1",
+        "name": "System Health Monitor",
+        "platform": "ClawHub",
+        "category": "DevOps",
+        "description": "Monitor server health and receive alerts directly in chat.",
+        "url": "https://clawhub.io",
+        "trending": false,
+        "hotness": 75,
+        "downloads": "2.1K"
+    },
+    {
+        "id": "composio_1",
+        "name": "GitHub Power Tool",
+        "platform": "Composio",
+        "category": "Productivity",
+        "description": "Advanced GitHub integration for repository management and PR automation.",
+        "url": "https://composio.ai",
+        "trending": true,
+        "hotness": 93,
+        "downloads": "22K"
+    },
+    {
+        "id": "toolhouse_1",
+        "name": "Memory Explorer",
+        "platform": "Toolhouse",
+        "category": "Research",
+        "description": "Enhanced long-term memory and knowledge retrieval tool for agents.",
+        "url": "https://toolhouse.ai",
+        "trending": true,
+        "hotness": 89,
+        "downloads": "11K"
+    },
+    {
+        "id": "langchain_1",
+        "name": "RAG improver",
+        "platform": "LangChain",
+        "category": "Coding",
+        "description": "Optimize your Retrieval Augmented Generation pipelines with specific prompts.",
+        "url": "https://smith.langchain.com/hub",
+        "trending": true,
+        "hotness": 96,
+        "downloads": "45K"
     }
 ]
