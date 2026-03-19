@@ -46,5 +46,13 @@ def refresh_metrics():
     save_data(data)
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Sync complete. {len(data)} items updated.")
 
+    # Trigger i18n extraction to capture any new strings or categories
+    try:
+        import subprocess
+        subprocess.run(['python3', 'scripts/extract_i18n.py'], check=True)
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] i18n extraction complete.")
+    except Exception as e:
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Failed to run i18n extraction: {e}")
+
 if __name__ == "__main__":
     refresh_metrics()
