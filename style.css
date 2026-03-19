@@ -103,6 +103,27 @@ h1, h2, h3 {
     border-top: 1px solid var(--card-border);
 }
 
+.language-switcher {
+    margin-bottom: 20px;
+}
+
+#language-select {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition);
+}
+
+#language-select:focus {
+    border-color: var(--accent);
+}
+
 .user-profile {
     display: flex;
     align-items: center;

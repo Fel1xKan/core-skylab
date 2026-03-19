@@ -72,9 +72,24 @@ const modalOverlay = document.getElementById('add-modal');
 const closeModalBtn = document.getElementById('close-modal');
 const addSkillForm = document.getElementById('add-skill-form');
 const syncDataBtn = document.getElementById('sync-data-btn');
+const languageSelect = document.getElementById('language-select');
 
 // Initialization
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize i18n
+    if (window.i18n) {
+        await window.i18n.init();
+        if (languageSelect) {
+            languageSelect.value = window.i18n.currentLang;
+            languageSelect.addEventListener('change', (e) => {
+                window.i18n.setLanguage(e.target.value);
+            });
+        }
+        window.i18n.onLanguageChange = () => {
+            renderPage();
+        };
+    }
+
     fetchLatestData(); // Load dynamic data
     setupEventListeners();
 });
@@ -82,11 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Sync Button
     syncDataBtn.addEventListener('click', async () => {
-        syncDataBtn.textContent = '⌛ Syncing...';
+        const originalBtnHtml = syncDataBtn.innerHTML;
+        syncDataBtn.innerHTML = `⌛ ${window.i18n ? window.i18n.t('status_syncing', 'Syncing...') : 'Syncing...'}`;
         syncDataBtn.disabled = true;
         await fetchLatestData();
         setTimeout(() => {
-            syncDataBtn.textContent = '🔄 Sync Market';
+            syncDataBtn.innerHTML = originalBtnHtml;
             syncDataBtn.disabled = false;
         }, 1000);
     });
@@ -148,7 +164,7 @@ function setupEventListeners() {
             const url = copyBtn.dataset.url;
             navigator.clipboard.writeText(url).then(() => {
                 const originalText = copyBtn.innerHTML;
-                copyBtn.innerHTML = '✅ Copied';
+                copyBtn.innerHTML = `✅ ${window.i18n ? window.i18n.t('status_copied', 'Copied') : 'Copied'}`;
                 setTimeout(() => {
                     copyBtn.innerHTML = originalText;
                 }, 2000);
@@ -201,14 +217,14 @@ function renderDiscoverPage(query = '') {
     
     let html = `
         <div class="section-title">
-            <h2>Discover Popular Skills</h2>
-            <p>Trending tools and plugins from across the AI ecosystem.</p>
+            <h2>${window.i18n ? window.i18n.t('discover_title', 'Discover Popular Skills') : 'Discover Popular Skills'}</h2>
+            <p>${window.i18n ? window.i18n.t('discover_subtitle', 'Trending tools and plugins from across the AI ecosystem.') : 'Trending tools and plugins from across the AI ecosystem.'}</p>
         </div>
         
         <div class="filters">
             ${categories.map(cat => `
                 <div class="filter-chip ${currentFilter === cat ? 'active' : ''}" onclick="setFilter('${cat}')">
-                    ${cat}
+                    ${window.i18n ? window.i18n.t(cat, cat) : cat}
                 </div>
             `).join('')}
         </div>
@@ -223,7 +239,7 @@ function renderDiscoverPage(query = '') {
     });
 
     if (filtered.length === 0) {
-        html += `<div class="no-results">No skills found matching your search.</div>`;
+        html += `<div class="no-results">${window.i18n ? window.i18n.t('no_results', 'No skills found matching your search.') : 'No skills found matching your search.'}</div>`;
     } else {
         filtered.forEach(skill => {
             html += renderSkillCard(skill);
@@ -237,8 +253,8 @@ function renderDiscoverPage(query = '') {
 function renderCollectionPage(query = '') {
     let html = `
         <div class="section-title">
-            <h2>My Collection</h2>
-            <p>Your curated list of essential AI skills.</p>
+            <h2>${window.i18n ? window.i18n.t('collection_title', 'My Collection') : 'My Collection'}</h2>
+            <p>${window.i18n ? window.i18n.t('collection_subtitle', 'Your curated list of essential AI skills.') : 'Your curated list of essential AI skills.'}</p>
         </div>
         <div class="skills-grid">
     `;
@@ -250,7 +266,7 @@ function renderCollectionPage(query = '') {
     if (filtered.length === 0) {
         html += `
             <div class="empty-state">
-                <p>Your collection is empty. Discover and save skills to see them here.</p>
+                <p>${window.i18n ? window.i18n.t('collection_empty', 'Your collection is empty. Discover and save skills to see them here.') : 'Your collection is empty. Discover and save skills to see them here.'}</p>
             </div>
         `;
     } else {
@@ -265,30 +281,30 @@ function renderCollectionPage(query = '') {
 
 function renderPlatformsPage() {
     const platforms = [
-        { name: 'Smithery', url: 'https://smithery.ai', desc: 'The leading MCP ecosystem for discovering and installing tools.' },
-        { name: 'Glama', url: 'https://glama.ai/mcp', desc: 'Curated directory of high-quality MCP servers with detailed docs.' },
-        { name: 'MCP Directory', url: 'https://mcp-directory.com', desc: 'Community-driven registry of open-source MCP projects.' },
-        { name: 'Linkup', url: 'https://linkup.ai', desc: 'Deep web search and real-time data API for AI agents.' },
-        { name: 'E2B', url: 'https://e2b.dev', desc: 'Secure cloud sandboxes for running code and AI tools.' },
-        { name: 'Composio', url: 'https://composio.ai', desc: 'Connect LLMs with 100+ apps like GitHub, Slack, and Jira.' },
-        { name: 'Coze', url: 'https://www.coze.com', desc: 'ByteDance\'s platform for building AI agents and plugins.' },
-        { name: 'GPT Store', url: 'https://chat.openai.com/gpts', desc: 'The official marketplace for custom ChatGPT versions.' },
-        { name: 'Warp Drive', url: 'https://www.warp.dev/drive', desc: 'A market for terminal-based AI workflows and commands.' },
-        { name: 'Pulse MCP', url: 'https://pulsemcp.com', desc: 'A hub for tracking trending and new MCP servers.' },
-        { name: 'MCP.run', url: 'https://mcp.run', desc: 'Deploy and run MCP servers in a serverless environment.' }
+        { name: 'Smithery', url: 'https://smithery.ai', desc: 'platform_desc_smithery' },
+        { name: 'Glama', url: 'https://glama.ai/mcp', desc: 'platform_desc_glama' },
+        { name: 'MCP Directory', url: 'https://mcp-directory.com', desc: 'platform_desc_mcp_directory' },
+        { name: 'Linkup', url: 'https://linkup.ai', desc: 'platform_desc_linkup' },
+        { name: 'E2B', url: 'https://e2b.dev', desc: 'platform_desc_e2b' },
+        { name: 'Composio', url: 'https://composio.ai', desc: 'platform_desc_composio' },
+        { name: 'Coze', url: 'https://www.coze.com', desc: 'platform_desc_coze' },
+        { name: 'GPT Store', url: 'https://chat.openai.com/gpts', desc: 'platform_desc_gpt_store' },
+        { name: 'Warp Drive', url: 'https://www.warp.dev/drive', desc: 'platform_desc_warp_drive' },
+        { name: 'Pulse MCP', url: 'https://pulsemcp.com', desc: 'platform_desc_pulse_mcp' },
+        { name: 'MCP.run', url: 'https://mcp.run', desc: 'platform_desc_mcp_run' }
     ];
 
     let html = `
         <div class="section-title">
-            <h2>Top AI Platforms</h2>
-            <p>Explore the ecosystems driving the AI skill revolution.</p>
+            <h2>${window.i18n ? window.i18n.t('platforms_title', 'Top AI Platforms') : 'Top AI Platforms'}</h2>
+            <p>${window.i18n ? window.i18n.t('platforms_subtitle', 'Explore the ecosystems driving the AI skill revolution.') : 'Explore the ecosystems driving the AI skill revolution.'}</p>
         </div>
         <div class="skills-grid">
             ${platforms.map(p => `
                 <div class="skill-card platform-card">
                     <h3>${p.name}</h3>
-                    <p>${p.desc}</p>
-                    <a href="${p.url}" target="_blank" class="btn-primary" style="display:inline-block; text-decoration:none; text-align:center; width:100%">Visit Marketplace</a>
+                    <p>${window.i18n ? window.i18n.t(p.desc, p.desc) : p.desc}</p>
+                    <a href="${p.url}" target="_blank" class="btn-primary" style="display:inline-block; text-decoration:none; text-align:center; width:100%">${window.i18n ? window.i18n.t('btn_visit_marketplace', 'Visit Marketplace') : 'Visit Marketplace'}</a>
                 </div>
             `).join('')}
         </div>
@@ -305,7 +321,7 @@ function renderSkillCard(skill) {
         installHtml = `
             <div class="install-cmd">
                 <code>${skill.install_command}</code>
-                <button class="copy-cmd-btn" data-cmd="${skill.install_command}" title="Copy Command">📋</button>
+                <button class="copy-cmd-btn" data-cmd="${skill.install_command}" title="${window.i18n ? window.i18n.t('title_copy_command', 'Copy Command') : 'Copy Command'}">📋</button>
             </div>
         `;
     }
@@ -315,7 +331,7 @@ function renderSkillCard(skill) {
             <div class="card-header">
                 <div class="header-left">
                     <span class="platform-badge">${skill.platform}</span>
-                    ${skill.trending ? '<span class="trending-badge">🔥 Hot</span>' : ''}
+                    ${skill.trending ? `<span class="trending-badge">🔥 ${window.i18n ? window.i18n.t('badge_hot', 'Hot') : 'Hot'}</span>` : ''}
                 </div>
                 <button class="save-btn ${saved ? 'active' : ''}" data-id="${skill.id}">
                     ${saved ? '★' : '☆'}
@@ -324,17 +340,17 @@ function renderSkillCard(skill) {
             <div class="popularity-bar">
                 <div class="popularity-fill" style="width: ${skill.hotness}%; background: ${hotnessColor}"></div>
             </div>
-            <h3>${skill.name}</h3>
-            <p>${skill.description}</p>
+            <h3>${window.i18n ? window.i18n.t(skill.name, skill.name) : skill.name}</h3>
+            <p>${window.i18n ? window.i18n.t(skill.description, skill.description) : skill.description}</p>
             ${installHtml}
             <div class="card-footer">
                 <div class="stats">
                     <span class="stat-item">👥 ${skill.downloads || 'N/A'}</span>
-                    <span class="category-tag">#${skill.category}</span>
+                    <span class="category-tag">#${window.i18n ? window.i18n.t(skill.category, skill.category) : skill.category}</span>
                 </div>
                 <div class="card-actions">
-                    <button class="copy-btn" data-url="${skill.url}">📋 Copy URL</button>
-                    <a href="${skill.url}" target="_blank" class="visit-link">Visit →</a>
+                    <button class="copy-btn" data-url="${skill.url}">📋 ${window.i18n ? window.i18n.t('btn_copy_url', 'Copy URL') : 'Copy URL'}</button>
+                    <a href="${skill.url}" target="_blank" class="visit-link">${window.i18n ? window.i18n.t('link_visit', 'Visit') : 'Visit'} →</a>
                 </div>
             </div>
         </div>
